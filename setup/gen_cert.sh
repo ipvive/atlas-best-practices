@@ -77,7 +77,8 @@ KEY="${BASE}.key"
 CRT="${BASE}.crt"
 SITESSLCONF=${BUILDDIR}/site_selfsigned_openssl.cnf
 
-cp openssl.cnf ${SITESSLCONF}
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cp ${SCRIPTDIR}/openssl.cnf ${SITESSLCONF}
 (cat <<EOF
 [ alt_names ]
 DNS.1 = ${DOMAIN}
@@ -109,7 +110,7 @@ KEY="${BASE}.key"
 CRT="${BASE}.crt"
 VAULTSSLCONF=${BUILDDIR}/vault_selfsigned_openssl.cnf
 
- cp openssl.cnf ${VAULTSSLCONF}
+cp ${SCRIPTDIR}/openssl.cnf ${SITESSLCONF}
  (cat <<EOF
 [ alt_names ]
 DNS.1 = *.node.${DOMAIN}
