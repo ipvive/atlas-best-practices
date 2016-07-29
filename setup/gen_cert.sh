@@ -66,7 +66,7 @@ fi
 # Create a temporary build dir and make sure we clean it up. For
 # debugging, comment out the trap line.
 BUILDDIR=`mktemp -d /tmp/ssl-XXXXXX`
-trap "rm -rf $BUILDDIR" INT TERM EXIT
+# trap "rm -rf $BUILDDIR" INT TERM EXIT
 
 echo "Creating site cert"
 
@@ -110,7 +110,7 @@ KEY="${BASE}.key"
 CRT="${BASE}.crt"
 VAULTSSLCONF=${BUILDDIR}/vault_selfsigned_openssl.cnf
 
-cp ${SCRIPTDIR}/openssl.cnf ${SITESSLCONF}
+cp ${SCRIPTDIR}/openssl.cnf ${VAULTSSLCONF}
  (cat <<EOF
 [ alt_names ]
 DNS.1 = *.node.${DOMAIN}
