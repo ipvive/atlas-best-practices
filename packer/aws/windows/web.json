@@ -47,6 +47,7 @@
     {
       "type": "powershell",
       "scripts": [
+        "{{user `scripts_dir`}}/install_web_server.ps1",
         "{{user `scripts_dir`}}/set_ec2_config.ps1"
       ]
     },
