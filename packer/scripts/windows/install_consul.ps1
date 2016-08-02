@@ -1,5 +1,5 @@
 write-output "Creating Consul directories"
-foreach ($dir in @('log', 'data')) {
+foreach ($dir in @('log', 'data', 'dist')) {
   New-Item -Path "C:\opt\consul\$dir" -ItemType Directory -Force
 }
 
