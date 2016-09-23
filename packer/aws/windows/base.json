@@ -12,7 +12,7 @@
     "winrm_username":    "Administrator",
     "user_data_file":    "packer/scripts/windows/config/ec2_user_data.conf",
     "scripts_dir":       "packer/scripts/windows",
-    "consul_config_dir": "C:\\etc\\consul.d"
+    "consul_config_dir": "C:\\etc\\consul.d",
     "nomad_config_dir":  "C:\\etc\\nomad.d"
   },
   "push": {
@@ -78,7 +78,7 @@
     {
       "type": "powershell",
       "inline": [
-        "New-Item -Path {{user `consul_config_dir`}} -ItemType Directory -Force"
+        "New-Item -Path {{user `consul_config_dir`}} -ItemType Directory -Force",
         "New-Item -Path {{user `nomad_config_dir`}} -ItemType Directory -Force"
       ]
     },
@@ -95,12 +95,12 @@
     {
       "type": "file",
       "source": "{{user `scripts_dir`}}/nomad_client.json",
-      "destination": "{{user `consul_config_dir`}}\\nomad.json
+      "destination": "{{user `consul_config_dir`}}\\nomad.json"
     },
     {
       "type": "powershell",
       "scripts": [
-        "{{user `scripts_dir`}}/install_consul.ps1"
+        "{{user `scripts_dir`}}/install_consul.ps1",
         "{{user `scripts_dir`}}/install_nomad.ps1"
       ]
     }
