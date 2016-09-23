@@ -1,0 +1,14 @@
+{
+  "service": {
+    "name": "nomad-client",
+    "port": 4646,
+    "check": {
+      "id": "nomad-client",
+      "name": "Running on port 4646",
+      "tcp": "localhost:4646",
+      "interval": "10s",
+      "timeout": "1s"
+    }
+  }
+}
+
