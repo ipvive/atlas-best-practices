@@ -1,0 +1,14 @@
+worker_processes 1;
+events { worker_connections 1024; }
+http {
+  sendfile on;
+  upstream wavemotionextract {
+    {{range service "wavemotionextract"}} server {{.Address}}:{{.Port}} {{end}}
+  }
+  server {
+    listen 80;
+    location /wavemotionextract {
+      proxy_pass http://wavemotionextract
+    }
+  }
+}
