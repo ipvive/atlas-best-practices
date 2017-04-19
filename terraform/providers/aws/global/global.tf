@@ -69,7 +69,7 @@ EOF
 
 module "iam_consul" {
   source = "../../../modules/aws/util/iam"
-  name   = "${var.name}-consul
+  name   = "${var.name}-consul"
   users  = "${var.iam_consul_envs}"
   policy = <<EOF
 {
