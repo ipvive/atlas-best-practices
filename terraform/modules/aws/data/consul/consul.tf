@@ -70,7 +70,7 @@ resource "aws_instance" "consul" {
 
   tags {
     Name = "${var.name}.${count.index+1}"
-    ConsulServerDatacenter = "${var.consul_datacenter}"}
+    ConsulServerDatacenter = "${var.consul_datacenter}"
   }
 }
 
