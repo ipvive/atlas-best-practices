@@ -10,6 +10,7 @@ variable "key_name"           { }
 variable "atlas_username"     { }
 variable "atlas_environment"  { }
 variable "atlas_token"        { }
+variable "consul_datacenter"  { }
 variable "amis"               { }
 variable "nodes"              { }
 variable "instance_type"      { }
@@ -24,10 +25,7 @@ resource "aws_security_group" "consul" {
   vpc_id      = "${var.vpc_id}"
   description = "Security group for Consul"
 
-  tags {
-    Name = "${var.name}"
-    Infrastructure = "${var.atlas_environment}"
-  }
+  tags { Name = "${var.name}" }
   lifecycle { create_before_destroy = true }
 
   ingress {
@@ -70,7 +68,10 @@ resource "aws_instance" "consul" {
 
   vpc_security_group_ids = ["${aws_security_group.consul.id}"]
 
-  tags { Name = "${var.name}.${count.index+1}" }
+  tags {
+    Name = "${var.name}.${count.index+1}"
+    ConsulServerDatacenter = "${var.consul_datacenter}"}
+  }
 }
 
 resource "null_resource" "openvpn_dns" {

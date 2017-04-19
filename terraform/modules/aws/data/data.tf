@@ -41,6 +41,7 @@ module "consul" {
   atlas_username     = "${var.atlas_username}"
   atlas_environment  = "${var.atlas_environment}"
   atlas_token        = "${var.atlas_token}"
+  consul_datacenter  = "${var.atlas_environment}"
   amis               = "${var.consul_amis}"
   nodes              = "${var.consul_node_count}"
   instance_type      = "${var.consul_instance_type}"
