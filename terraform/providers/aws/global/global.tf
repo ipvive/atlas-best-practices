@@ -5,6 +5,7 @@ variable "name"              { }
 variable "region"            { }
 variable "iam_admins"        { }
 variable "iam_vault_envs"    { }
+variable "iam_consul_envs"   { }
 
 provider "aws" {
   region = "${var.region}"
@@ -66,6 +67,24 @@ module "iam_vault" {
 EOF
 }
 
+module "iam_consul" {
+  source = "../../../modules/aws/util/iam"
+  name   = "${var.name}-consul
+  users  = "${var.iam_consul_envs}"
+  policy = <<EOF
+{
+  "Version": 2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ec2:DescribeInstances",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
 resource "aws_route53_zone" "zone" {
   name = "${var.domain}"
 }
@@ -89,14 +108,24 @@ Vault IAM:
   Access IDs: ${join("\n              ", formatlist("%s", split(",", module.iam_vault.access_ids)))}
 
   Secret Keys: ${join("\n               ", formatlist("%s", split(",", module.iam_vault.secret_keys)))}
+
+Consul IAM:
+  Vault Users: ${join("\n               ", formatlist("%s", split(",", module.iam_consul.users)))}
+
+  Access IDs: ${join("\n              ", formatlist("%s", split(",", module.iam_consul.access_ids)))}
+
+  Secret Keys: ${join("\n               ", formatlist("%s", split(",", module.iam_consul.secret_keys)))}
 CONFIG
 }
 
-output "iam_admin_users"       { value = "${module.iam_admin.users}" }
-output "iam_admin_access_ids"  { value = "${module.iam_admin.access_ids}" }
-output "iam_admin_secret_keys" { value = "${module.iam_admin.secret_keys}" }
-output "iam_vault_users"       { value = "${module.iam_vault.users}" }
-output "iam_vault_access_ids"  { value = "${module.iam_vault.access_ids}" }
-output "iam_vault_secret_keys" { value = "${module.iam_vault.secret_keys}" }
+output "iam_admin_users"        { value = "${module.iam_admin.users}" }
+output "iam_admin_access_ids"   { value = "${module.iam_admin.access_ids}" }
+output "iam_admin_secret_keys"  { value = "${module.iam_admin.secret_keys}" }
+output "iam_vault_users"        { value = "${module.iam_vault.users}" }
+output "iam_vault_access_ids"   { value = "${module.iam_vault.access_ids}" }
+output "iam_vault_secret_keys"  { value = "${module.iam_vault.secret_keys}" }
+output "iam_consul_users"       { value = "${module.iam_consul.users}" }
+output "iam_consul_access_ids"  { value = "${module.iam_consul.access_ids}" }
+output "iam_consul_secret_keys" { value = "${module.iam_consul.secret_keys}" }
 
 output "zone_id" { value = "${aws_route53_zone.zone.zone_id}" }
