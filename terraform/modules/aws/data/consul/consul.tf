@@ -24,7 +24,10 @@ resource "aws_security_group" "consul" {
   vpc_id      = "${var.vpc_id}"
   description = "Security group for Consul"
 
-  tags      { Name = "${var.name}" }
+  tags {
+    Name = "${var.name}"
+    Infrastructure = "${var.atlas_environment}"
+  }
   lifecycle { create_before_destroy = true }
 
   ingress {
