@@ -73,7 +73,7 @@ module "iam_consul" {
   users  = "${var.iam_consul_envs}"
   policy = <<EOF
 {
-  "Version": 2012-10-17",
+  "Version": "2012-10-17",
   "Statement": [
     {
       "Effect": "Allow",
