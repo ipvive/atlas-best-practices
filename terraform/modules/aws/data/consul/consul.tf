@@ -50,9 +50,9 @@ resource "template_file" "user_data" {
   lifecycle { create_before_destroy = true }
 
   vars {
-    atlas_username      = "${var.atlas_username}"
-    atlas_environment   = "${var.atlas_environment}"
-    atlas_token         = "${var.atlas_token}"
+    atlas_username      = "UNUSED"
+    atlas_environment   = "${var.consul_datacenter}"
+    atlas_token         = "UNUSED"
     consul_server_count = "${var.nodes}"
     node_name           = "${var.name}-${count.index+1}"
   }
