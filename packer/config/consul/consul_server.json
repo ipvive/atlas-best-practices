@@ -8,7 +8,7 @@
   "retry_join_ec2": {
     "region": "us-west-2",
     "tag_key": "ConsulServerDatacenter",
-    "tag_value": "{{ datacenter }}",
+    "tag_value": "{{ datacenter }}"
   }
   "bootstrap_expect": "{{ consul_server_count }}",
   "datacenter": "{{ datacenter }}",
