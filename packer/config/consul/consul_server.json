@@ -9,7 +9,7 @@
     "region": "us-west-2",
     "tag_key": "ConsulServerDatacenter",
     "tag_value": "{{ datacenter }}"
-  }
+  },
   "bootstrap_expect": "{{ consul_server_count }}",
   "datacenter": "{{ datacenter }}",
   "node_name": "{{ node_name }}",
